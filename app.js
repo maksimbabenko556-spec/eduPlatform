@@ -42,6 +42,40 @@ const SUBJECTS_DATA = [
   }
 ];
 
+// БАЗА ДАННЫХ ЗАДАЧ И НОМЕРОВ ИЗ УЧЕБНИКА
+const TASKS_DATABASE = [
+  {
+    subject: "Алгебра",
+    keywords: ["105", "номер 105", "№105", "дискриминант", "x^2 - 5x + 6"],
+    condition: "Учебник Алгебра, № 105: Решите квадратное уравнение x² - 5x + 6 = 0.",
+    fullAnswer: "Дано: x² - 5x + 6 = 0\nКоэффициенты: a = 1, b = -5, c = 6.\n\nХод решения:\n1. Вычисляем дискриминант по формуле D = b² - 4ac:\nD = (-5)² - 4 · 1 · 6 = 25 - 24 = 1.\n2. Так как D > 0, уравнение имеет два корня:\nx₁ = (5 + √1) / (2 · 1) = (5 + 1) / 2 = 3.\nx₂ = (5 - √1) / (2 · 1) = (5 - 1) / 2 = 2.\n\nОкончательный ответ: x₁ = 3; x₂ = 2."
+  },
+  {
+    subject: "Алгебра",
+    keywords: ["24", "номер 24", "№24", "процент", "скидк"],
+    condition: "Учебник Алгебра, № 24: Товар стоил 2000 рублей, затем цену снизили на 15%. Сколько стал стоить товар?",
+    fullAnswer: "Дано: начальная цена = 2000 руб., скидка = 15%.\n\nХод решения:\n1. Найдём 1% от суммы: 2000 / 100 = 20 руб.\n2. Найдём размер скидки (15%): 20 · 15 = 300 руб.\n3. Вычтем скидку из начальной цены: 2000 - 300 = 1700 руб.\n\nОкончательный ответ: 1700 рублей."
+  },
+  {
+    subject: "Русский язык",
+    keywords: ["48", "номер 48", "№48", "упражнение 48", "корн", "чередован"],
+    condition: "Учебник Русский язык, Упражнение № 48: Вставьте пропущенные буквы в словах с чередующимися гласными в корне (р..сти, заг..реть, соб..рать).",
+    fullAnswer: "Полный разбор упражнения № 48:\n1. рАсти — в корне -раст-/-ращ-/-рос- перед «ст» пишется буква А.\n2. загОреть — в корне -гар-/-гор- без ударения пишется буква О.\n3. собИрать — в корне -бер-/-бир- пишется И, так как после корня стоит суффикс -а-.\n\nОкончательный ответ: расти, загореть, собирать."
+  },
+  {
+    subject: "Физика",
+    keywords: ["12", "номер 12", "№12", "плотност", "масс", "объем"],
+    condition: "Учебник Физика, Задача № 12: Определите массу железного бруска объёмом 0,2 м³, если плотность железа равна 7800 кг/м³.",
+    fullAnswer: "Дано:\nV = 0,2 м³\nρ = 7800 кг/м³\nНайти: m - ?\n\nХод решения:\n1. Запишем формулу связи массы, плотности и объёма: m = ρ · V.\n2. Подставим значения из условия: m = 7800 кг/м³ · 0,2 м³ = 1560 кг.\n\nОкончательный ответ: m = 1560 кг (или 1,56 т)."
+  },
+  {
+    subject: "Информатика",
+    keywords: ["15", "номер 15", "№15", "информац", "байт", "бит", "двоич"],
+    condition: "Учебник Информатика, Задание № 15: Переведите число 25 из десятичной системы счисления в двоичную.",
+    fullAnswer: "Дано: 25₁₀.\n\nХод решения (деление столбиком на 2):\n25 : 2 = 12 (остаток 1)\n12 : 2 = 6 (остаток 0)\n6 : 2 = 3 (остаток 0)\n3 : 2 = 1 (остаток 1)\n1 : 2 = 0 (остаток 1)\nЗаписываем остатки снизу вверх: 11001.\n\nОкончательный ответ: 25₁₀ = 11001₂."
+  }
+];
+
 // Состояние приложения
 let isLoginMode = false;
 let currentUser = JSON.parse(localStorage.getItem("edu_current_user")) || null;
@@ -162,7 +196,7 @@ document.querySelectorAll(".tab-btn").forEach(btn => {
   });
 });
 
-// === ЛОГИКА УЧЕНИКА ===
+// === ЛОГИКА УЧЕНИКА: ПРЕДМЕТЫ ===
 function renderSubjects() {
   const grid = document.getElementById("subjects-grid");
   grid.innerHTML = "";
@@ -178,75 +212,3 @@ function renderSubjects() {
     grid.appendChild(card);
   });
 }
-
-window.openSubjectModal = function(idx) {
-  const subj = SUBJECTS_DATA[idx];
-  document.getElementById("modal-subject-title").textContent = `${subj.name} — базовые решения`;
-  const body = document.getElementById("modal-subject-body");
-  body.innerHTML = subj.solutions.map(s => `
-    <div class="solution-item">
-      <strong>${s.task}</strong>
-      <p style="margin-top:6px; white-space: pre-line;">${s.answer}</p>
-    </div>
-  `).join("");
-  document.getElementById("subject-modal").classList.remove("hidden");
-};
-
-document.getElementById("close-modal-btn").addEventListener("click", () => {
-  document.getElementById("subject-modal").classList.add("hidden");
-});
-
-function renderStudentDiary() {
-  const tbody = document.getElementById("student-grades-body");
-  const fullName = `${currentUser.firstName} ${currentUser.lastName}`.toLowerCase();
-  const myGrades = grades.filter(g => g.student.toLowerCase() === fullName);
-  if (myGrades.length === 0) {
-    tbody.innerHTML = `<tr><td colspan="4">Оценок пока нет.</td></tr>`;
-    return;
-  }
-
-  tbody.innerHTML = myGrades.map(g => `
-    <tr>
-      <td>${g.date}</td>
-      <td>${g.subject}</td>
-      <td>${g.topic}</td>
-      <td><span class="grade-pill">${g.grade}</span></td>
-    </tr>
-  `).join("");
-}
-
-document.getElementById("request-grade-btn").addEventListener("click", () => {
-  const fullName = `${currentUser.firstName} ${currentUser.lastName}`;
-  grades.unshift({
-    date: new Date().toLocaleDateString("ru-RU"),
-    student: fullName,
-    subject: "Алгебра",
-    topic: "Запрос на проверку работы",
-    grade: "Ожидает оценки"
-  });
-  localStorage.setItem("edu_grades", JSON.stringify(grades));
-  renderStudentDiary();
-  document.getElementById("request-status").textContent = "Заявка отправлена! Учитель увидит её в своём журнале.";
-});
-
-// === ЛОГИКА УЧИТЕЛЯ ===
-document.getElementById("add-grade-btn").addEventListener("click", () => {
-  const student = document.getElementById("grade-student-name").value.trim();
-  const subject = document.getElementById("grade-subject").value;
-  const topic = document.getElementById("grade-topic").value.trim() || "Работа на уроке";
-  const grade = document.getElementById("grade-value").value;
-
-  if (!student) return;
-
-  grades.unshift({
-    date: new Date().toLocaleDateString("ru-RU"),
-    student,
-    subject,
-    topic,
-    grade
-  });
-  localStorage.setItem("edu_grades", JSON.stringify(grades));
-  document.getElementById("grade-student-name").value = "";
-  document.getElementById("grade-topic").value = "";
-  renderTeacherJournal();
-});
