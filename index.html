@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Мой дом музыки</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header>
+      <h1>Ваша знаменитость, ваша популярность начинается здесь</h1>
+      <nav>
+        <a href="#home">Главная</a>
+        <a href="#cabinet">Личный кабинет</a>
+        <a href="#contacts">Контакты</a>
+      </nav>
+    </header>
+
+    <main>
+      <section id="home">
+        <h2>Добро пожаловать</h2>
+        <p>Загружайте видео, делитесь творчеством и собирайте свою аудиторию.</p>
+        <button id="uploadBtn">Загрузить видео</button>
+      </section>
+
+      <section id="cabinet">
+        <h2>Личный кабинет</h2>
+        <form id="uploadForm">
+          <label>Название видео:</label>
+          <input type="text" name="title" required />
+
+          <label>Ссылка на видео:</label>
+          <input type="url" name="videoUrl" placeholder="https://..." required />
+
+          <label>Обложка (URL картинки):</label>
+          <input type="url" name="coverUrl" required />
+
+          <button type="submit">Отправить на модерацию</button>
+        </form>
+      </section>
+
+      <section id="contacts">
+        <h2>Контакты</h2>
+        <p>Пишите нам: support@example.com</p>
+      </section>
+    </main>
+
+    <footer>
+      <p>&copy; 2026 Мой дом музыки. Все права защищены.</p>
+    </footer>
+
+    <script src="script.js"></script>
+  </body>
+</html>
