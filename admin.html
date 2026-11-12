@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Мой органайзер — администрация</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">📚 Мой органайзер</div>
+    <div class="user-badge" id="userBadge"></div>
+    <button class="btn-exit" onclick="logout()">Выход</button>
+  </header>
+
+  <nav class="tabs">
+    <button class="tab active" data-tab="users">Пользователи</button>
+    <button class="tab" data-tab="stats">Статистика</button>
+  </nav>
+
+  <main>
+    <section id="users" class="panel">
+      <h2>Пользователи системы</h2>
+      <table>
+        <thead><tr><th>Имя</th><th>Email</th><th>Роль</th><th></th></tr></thead>
+        <tbody id="usersBody"></tbody>
+      </table>
+    </section>
+
+    <section id="stats" class="panel hidden">
+      <h2>Статистика</h2>
+      <div class="stat-cards">
+        <div class="stat-card"><span id="stUsers">0</span><small>Пользователей</small></div>
+        <div class="stat-card"><span id="stGrades">0</span><small>Оценок выставлено</small></div>
+      </div>
+    </section>
+  </main>
+  <script src="app.js"></script>
+</body>
+</html>

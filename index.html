@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Мой органайзер — регистрация</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="auth-wrap">
+    <div class="auth-card">
+      <div class="logo-area">
+        <div class="logo-icon">📚</div>
+        <h1>Мой органайзер</h1>
+        <p class="subtitle">Учись с удовольствием</p>
+      </div>
+
+      <h2>Регистрация</h2>
+      <form id="regForm">
+        <input type="text" id="regName" placeholder="Имя" required>
+        <input type="text" id="regSurname" placeholder="Фамилия" required>
+        <input type="email" id="regEmail" placeholder="Электронная почта" required>
+        <input type="password" id="regPass" placeholder="Пароль" required minlength="4">
+
+        <div class="role-row">
+          <label class="role-chip"><input type="radio" name="role" value="student" checked> Ученик</label>
+          <label class="role-chip"><input type="radio" name="role" value="teacher"> Учитель</label>
+          <label class="role-chip"><input type="radio" name="role" value="admin"> Администрация</label>
+        </div>
+
+        <input type="password" id="regCode" class="hidden" placeholder="Код доступа">
+        <button type="submit" class="btn-main">Создать аккаунт</button>
+      </form>
+
+      <p class="switch">Уже есть аккаунт? <a href="login.html">Войти</a></p>
+    </div>
+  </div>
+  <script src="app.js"></script>
+</body>
+</html>
