@@ -211,3 +211,55 @@ function escapeHtml(t) {
   d.textContent = t || '';
   return d.innerHTML;
 }
+
+// Функция для одобрения/отклонения заявок
+window.decide = (id, ok) => {
+  const reqs = getRequests();
+  const r = reqs.find(x => x.id === id);
+  if (!r) return;
+  r.status = ok ? 'approved' : 'declined';
+  r.reason = document.getElementById('reason-' + id).value.trim();
+  saveRequests(reqs);
+  render();
+};
+
+// Функция рендеринга заявок для модератора
+function renderModeration() {
+  const reqs = getRequests();
+  modList.innerHTML = reqs.map(r => `
+    <div class="req-card">
+      <h3>🎵 ${escapeHtml(r.title)} <span class="status processing">Обработка</span></h3>
+      <p>${escapeHtml(r.desc)}</p>
+      <div class="req-actions">
+        <input type="text" id="reason-${r.id}" placeholder="Причина решения">
+        <button onclick="window.decide('${r.id}', true)">Одобрить</button>
+        <button onclick="window.decide('${r.id}', false)">Отклонить</button>
+      </div>
+    </div>
+  `).join('');
+}
+
+function render() {
+  // ... код рендеринга
+  if (me.role === 'moderator') {
+    renderModeration();
+    renderBans();
+    if (typeof renderApproved === 'function') renderApproved();
+  }
+}
+
+/* ===== ОБНОВЛЕНИЕ: журнал одобренных заявок ===== */
+if (me && me.role === 'moderator') {
+  function renderApproved() {
+    const list = getRequests().filter(r => r.status === 'approved').slice().reverse();
+    approvedList.innerHTML = list.length ? list.map(r => `
+      <div class="req-card">
+        <h3>🎵 ${escapeHtml(r.title)} <span class="status approved">Одобрено</span></h3>
+        <p>${escapeHtml(r.desc)}</p>
+        <p style="color:#4ade80"><b>Причина одобрения:</b> ${escapeHtml(r.reason || 'соответствует требованиям')}</p>
+        <p>Обработано: ${r.date}</p>
+        ${r.file ? `<audio controls src="${r.file}"></audio>` : ''}
+      </div>`).join('') : '<p class="muted">Одобренных заявок пока нет.</p>';
+  }
+  renderApproved();
+}
