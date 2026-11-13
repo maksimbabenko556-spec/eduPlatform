@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Моё образование</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">🎓 Моё образование</div>
+
+    <!-- Карандаш справа вверху с подписью «Создать ЛК» -->
+    <a href="lk.html" class="lk-link" id="lkLink">
+      <span class="pencil">✏️</span>
+      <small>Создать ЛК</small>
+    </a>
+  </header>
+
+  <section class="hero">
+    <h1>Моё образование</h1>
+    <p>Всё для учёбы в одном месте: учебники, материалы и задания</p>
+    <a href="lk.html" class="btn-main">Создать личный кабинет</a>
+  </section>
+
+  <main>
+    <section id="textbooks" class="panel">
+      <h2>📚 Учебники</h2>
+      <div class="grid">
+        <div class="card" onclick="openBook('Математика 5 класс')">➕ Математика — 5 класс</div>
+        <div class="card" onclick="openBook('Математика 6 класс')">➕ Математика — 6 класс</div>
+        <div class="card" onclick="openBook('Русский язык')">📖 Русский язык</div>
+        <div class="card" onclick="openBook('Литература')">📕 Литература</div>
+        <div class="card" onclick="openBook('Английский язык')">🇬🇧 Английский язык</div>
+        <div class="card" onclick="openBook('Окружающий мир')">🌍 Окружающий мир</div>
+      </div>
+      <div id="bookInfo" class="hidden"></div>
+    </section>
+
+    <section id="info" class="panel">
+      <h2>ℹ️ Информация</h2>
+      <div class="grid">
+        <div class="card">
+          <h3>Ученикам</h3>
+          <p>Расписание уроков, домашние задания, график каникул и правила школы.</p>
+        </div>
+        <div class="card">
+          <h3>Учителям</h3>
+          <p>Методические материалы, план работы, критерии оценивания.</p>
+        </div>
+        <div class="card">
+          <h3>Родителям</h3>
+          <p>Питание, кружки, контакты классного руководителя.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="materials" class="panel">
+      <h2>📁 Материалы</h2>
+      <ul class="list">
+        <li>📝 Конспекты уроков по всем предметам</li>
+        <li>🧮 Тренировочные задания и ответы</li>
+        <li>📅 Календарь контрольных работ</li>
+        <li>🏆 Олимпиады и конкурсы этого года</li>
+      </ul>
+    </section>
+  </main>
+
+  <footer>
+    <p>© 2026 Моё образование</p>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
