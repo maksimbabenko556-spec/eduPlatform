@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Моё сердце</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="shortcut icon" href="assets/favicon.png">
+</head>
+<body>
+  <header>
+    <h1>Добро пожаловать в Моё сердце</h1>
+  </header>
+  <nav>
+    <ul>
+      <li><a href="#">Главная</a></li>
+      <li><a href="profile.html">Мой профиль</a></li>
+      <li><a href="#" onclick="showAddSong()">Добавить релиз</a></li>
+      <li><a href="#" onclick="showHistory()">История заявок</a></li>
+      <li><a href="#" id="moderatorBtn" style="display:none;">Зайти как модератор</a></li>
+    </ul>
+  </nav>
+  <main>
+    <div id="content"></div>
+  </main>
+  <footer>
+    <p>© 2026 Моё сердце</p>
+  </footer>
+  <script src="app.js"></script>
+</body>
+</html>
