@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Моя музыка — портал</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- ===== Регистрация / Вход ===== -->
+  <div id="authWrap" class="auth-wrap">
+    <div class="auth-card">
+      <div class="logo-icon">🎵</div>
+      <h1>Моя музыка</h1>
+      <p class="subtitle">Портал для авторов и исполнителей</p>
+
+      <div id="regBlock">
+        <h2>Регистрация</h2>
+        <form id="regForm">
+          <input type="text" id="regName" placeholder="Имя" required>
+          <input type="text" id="regSurname" placeholder="Фамилия" required>
+          <input type="email" id="regEmail" placeholder="Почта (обязательно)" required>
+          <input type="password" id="regPass" placeholder="Пароль" required minlength="4">
+          <div class="role-row">
+            <label class="role-chip"><input type="radio" name="role" value="author" checked> Автор-исполнитель</label>
+            <label class="role-chip"><input type="radio" name="role" value="moderator"> Модератор</label>
+          </div>
+          <input type="password" id="regCode" class="hidden" placeholder="Код доступа">
+          <button type="submit" class="btn">Зарегистрироваться</button>
+        </form>
+        <p class="switch">Уже есть аккаунт? <a href="#" id="toLogin">Войти</a></p>
+      </div>
+
+      <div id="loginBlock" class="hidden">
+        <h2>Вход</h2>
+        <form id="loginForm">
+          <input type="email" id="logEmail" placeholder="Почта" required>
+          <input type="password" id="logPass" placeholder="Пароль" required>
+          <button type="submit" class="btn">Войти</button>
+        </form>
+        <p class="switch">Нет аккаунта? <a href="#" id="toReg">Создать</a></p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== Приложение ===== -->
+  <div id="app" class="app hidden">
+    <aside class="sidebar">
+      <div class="brand">🎵 Моя музыка</div>
+      <div class="user-info" id="userBadge"></div>
+
+      <div id="authorMenu">
+        <button class="nav-btn active" data-view="home">🏠 Главная</button>
+        <button class="nav-btn nav-plus" data-view="upload">➕ Загрузить песню (Релиз)</button>
+        <button class="nav-btn" data-view="history">📜 История заявок</button>
+      </div>
+
+      <div id="modMenu" class="hidden">
+        <button class="nav-btn active" data-view="requests">📥 Заявки на проверку</button>
+        <button class="nav-btn" data-view="approved">✅ Одобренные</button>
+      </div>
+
+      <button class="nav-btn exit" id="exitBtn">↩ Выйти</button>
+    </aside>
+
+    <main class="content">
+      <!-- Главная автора -->
+      <section id="view-home" class="view">
+        <h1>Добро пожаловать в «Мою музыку» 🎶</h1>
+        <p class="muted">Здесь появятся все твои одобренные песни. Поделись ими с друзьями!</p>
+        <div id="approvedHome"></div>
+      </section>
+
+      <!-- Загрузка -->
+      <section id="view-upload" class="view hidden">
+        <h1>➕ Новый релиз</h1>
+        <form id="songForm" class="panel-form">
+          <input type="text" id="songTitle" placeholder="Название песни" required>
+          <textarea id="songDesc" placeholder="О чём песня, какие слова и т.д." required></textarea>
+          <input type="file" id="songFile" accept="audio/*" required>
+          <button type="submit" class="btn">Отправить на модерацию</button>
+        </form>
+        <p id="uploadMsg" class="ok-msg hidden"></p>
+      </section>
+
+      <!-- История заявок -->
+      <section id="view-history" class="view hidden">
+        <h1>📜 История заявок</h1>
+        <div id="historyList"></div>
+      </section>
+
+      <!-- Заявки модератора -->
+      <section id="view-requests" class="view hidden">
+        <h1>📥 Заявки на проверку</h1>
+        <p class="muted">Автор заявки скрыт — анонимная проверка.</p>
+        <div id="modList"></div>
+      </section>
+
+      <!-- Одобренные (модератор) -->
+      <section id="view-approved" class="view hidden">
+        <h1>✅ Одобренные релизы</h1>
+        <div id="modApproved"></div>
+      </section>
+    </main>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
