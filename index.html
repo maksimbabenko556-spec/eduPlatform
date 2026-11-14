@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ЭдуПорт — образовательная платформа</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- ===== Регистрация ===== -->
+  <div id="authWrap" class="auth-wrap">
+    <div class="auth-card">
+      <div class="logo-icon">🎓</div>
+      <h1>ЭдуПорт</h1>
+      <p class="subtitle">Ученики · Учителя · Модерация</p>
+
+      <form id="regForm">
+        <input type="text" id="regFio" placeholder="Полное ФИО *" required>
+        <input type="email" id="regEmail" placeholder="Почта *" required>
+        <input type="tel" id="regPhone" placeholder="Номер телефона *" required>
+        <input type="password" id="regPass" placeholder="Пароль *" required minlength="4">
+        <div class="role-row">
+          <label class="role-chip"><input type="radio" name="role" value="student" checked> Ученик</label>
+          <label class="role-chip"><input type="radio" name="role" value="teacher"> Учитель</label>
+          <label class="role-chip"><input type="radio" name="role" value="moderator"> Модератор</label>
+        </div>
+        <input type="password" id="regCode" class="hidden" placeholder="Код доступа">
+        <button type="submit" class="btn">Зарегистрироваться</button>
+      </form>
+
+      <p class="switch">Уже есть аккаунт? <a href="#" id="toLogin">Войти</a></p>
+
+      <div id="loginBlock" class="hidden">
